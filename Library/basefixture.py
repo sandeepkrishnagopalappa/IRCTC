@@ -20,3 +20,4 @@ class Driver_init:
         driver.implicitly_wait(20)
         yield
         driver.quit()
+
