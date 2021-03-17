@@ -13,15 +13,21 @@ class Register:
     def __init__(self, driver):
         self.driver = driver
 
+    def irctc_page(self):
+        assert self.driver.current_url.lower() == url," The url is not  IRCTC "
+
     def alert_ok(self):
         reg1 = Register.variable1["alert_ok"]
         Register.ObjectGen.click(self.driver, reg1)
+        #assert Register.ObjectGen.get_text(self.driver, reg1) == "OK"
         # self.driver.find_element_by_xpath("(//form)[1]//div//button").click()  # alert_ok
+
 
     def click_on_flight(self):
         reg2 = Register.variable1["click_on_flight"]
         Register.ObjectGen.click(self.driver, reg2)
         # self.driver.find_element_by_link_text("FLIGHTS").click()  # flights
+        assert self.driver.title.lower()==flight_title.lower()
 
     def window_switch(self):
         win_handles = self.driver.window_handles
@@ -32,6 +38,8 @@ class Register:
     def round_trip(self):
         reg3 = Register.variable1["round_trip"]
         Register.ObjectGen.click(self.driver, reg3)
+        time.sleep(3)
+        assert Register.ObjectGen.selected(self.driver,reg3),"The round trip button is not selected"
         # self.driver.find_element_by_xpath("//label[@for='Round-Trip']").click()
 
     def station_from_sending_keys(self):
@@ -73,6 +81,7 @@ class Register:
     def return_date_select(self):
         reg11 = Register.variable1["return_date_select"]
         Register.ObjectGen.click(self.driver, reg11)
+        assert Register.ObjectGen.displayed(self.driver,reg11)
         # self.driver.find_element_by_xpath( "//*[@id='Return-Date']/datepickermodifi/div/div[2]/div[2]/table/tbody/tr[2]/td[7]").click()  # return_date_select
 
     def search(self):
@@ -80,17 +89,26 @@ class Register:
         Register.ObjectGen.click(self.driver, reg12)
         # self.driver.find_element_by_xpath("/html/body/app-root/app-index/div[2]/div[3]/div/div/div/div[2]/form/button").click()  # search
 
+    time.sleep(15)
+    def book_button_check(self):
+        reg13 = Register.variable1["book"]
+        assert Register.ObjectGen.displayed(self.driver, reg13),"The book button is not visible"
+
     def book(self):
         reg13 = Register.variable1["book"]
         Register.ObjectGen.click(self.driver, reg13)
         # self.driver.find_element_by_xpath("//button[@class='btn btn-md text-primary white btn-rounded waves-effect waves-light m-0 font-14']").click()  # book
 
+
     def normal_fair(self):
         reg14 = Register.variable1["continue"]
         Register.ObjectGen.click(self.driver, reg14)
+        assert Register.ObjectGen.displayed(self.driver, reg12)
         #self.driver.find_element_by_xpath("//*[@id="modalflexiFare"]/div/div/div[3]/button[2]").click()
 
-
+    def gst_pop_up_check(self):
+        reg15 = Register.variable1["gst_pop_up"]
+        assert Register.ObjectGen.displayed(self.driver, reg15),"The Gst pop up not visble on  webpage"
 
     def gst_pop_up(self):
         reg15 = Register.variable1["gst_pop_up"]
