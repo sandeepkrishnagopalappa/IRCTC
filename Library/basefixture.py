@@ -17,7 +17,8 @@ class Driver_init:
         request.cls.driver=driver
         driver.get(url)
         driver.maximize_window()
-        driver.implicitly_wait(20)
+        driver.implicitly_wait(30)
         yield
         driver.quit()
+
 
